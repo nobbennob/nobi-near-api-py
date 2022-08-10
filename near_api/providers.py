@@ -22,12 +22,13 @@ class JsonProviderError(Exception):
 
 
 class JsonProvider(object):
-    def __init__(self, rpc_addr, proxies=None):
+    def __init__(self, rpc_addr, proxies=None, headers=None):
         if isinstance(rpc_addr, tuple):
             self._rpc_addr = "http://%s:%s" % rpc_addr
         else:
             self._rpc_addr = rpc_addr
         self.proxies = proxies
+        self.headers = headers
 
     def rpc_addr(self) -> str:
         return self._rpc_addr
@@ -39,7 +40,7 @@ class JsonProvider(object):
             'id': "dontcare",
             'jsonrpc': "2.0"
         }
-        r = requests.post(self.rpc_addr(), json=j, timeout=timeout, proxies=self.proxies)
+        r = requests.post(self.rpc_addr(), json=j, timeout=timeout, proxies=self.proxies, headers=self.headers)
         r.raise_for_status()
         content = json.loads(r.content)
         if "error" in content:
