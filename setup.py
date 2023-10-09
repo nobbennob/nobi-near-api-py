@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 META_DATA = dict(
     name="nobi-near-api-py",
-    version="0.1.1", # forked_version -> "0.1.0",
+    version="0.1.2", # forked_version -> "0.1.0",
     license="MIT",
 
     author="NEAR Inc",
